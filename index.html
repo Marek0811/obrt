@@ -3,28 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Naslovnica - Završni Radovi Interijera</title>
+  <title>Završni Radovi Interijera</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    .hero {
+      background: url('hero-image.jpg') center/cover no-repeat;
+      height: 50vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+    .section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      width: 300px;
+      max-height: 400px;
+      overflow: auto;
+      padding: 1rem;
+      display: none;
+    }
+    .chat-log {
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .chat-input {
+      display: flex;
+      gap: 5px;
+    }
+    .chat-input input {
+      flex-grow: 1;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Završni Radovi Interijera</h1>
-    <p>Specijalizirani za pločice, mikrocement, gletanje i bojanje</p>
+    <nav>
+      <a href="index.html">Naslovnica</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="mikrocement.html">Mikrocement</a>
+      <a href="inspiracija.html">Inspiracija</a>
+      <a href="proces.html">Proces</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
   </header>
-  <nav>
-    <a href="usluge.html">Usluge</a>
-    <a href="mikrocement.html">Mikrocement</a>
-    <a href="inspiracija.html">Inspiracija</a>
-    <a href="proces.html">Proces radova</a>
-    <a href="ponuda.html">Zatraži ponudu</a>
-    <a href="kontakt.html">Kontakt</a>
-  </nav>
-  <section class="hero">
-    <h2>Vaš pouzdani partner za uređenje interijera</h2>
-    <p>Brzo, precizno i kvalitetno</p>
-  </section>
+
+  <div class="hero">
+    Transformiramo interijere – precizno, moderno i po mjeri.
+  </div>
+
+  <main class="section">
+    <h2>O nama</h2>
+    <p>
+      Naš obrt specijaliziran je za završne radove interijera – od preciznog polaganja pločica, modernog mikrocementa, do gletanja i bojanja zidova. 
+      Kroz godine iskustva i rad na različitim projektima, izgradili smo reputaciju pouzdanog partnera za sve koji žele kvalitetno izvedene radove, bez kompromisa.
+    </p>
+    <p>
+      Svakom klijentu pristupamo individualno, s jasnim planom i transparentnim rokovima. Uz našu aplikaciju možete pratiti tijek radova, slike i procijenjeni završetak – dan po dan.
+    </p>
+  </main>
+
+  <div class="chatbot" id="chatbot">
+    <div class="chat-log" id="chatLog">
+      <strong>Asistent:</strong>
+      <p>Bok! Postavite mi pitanje o uslugama, terminima, cijenama ili bilo čemu vezanom za radove.</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Vaše pitanje...">
+      <button onclick="replyToUser()">Pošalji</button>
+    </div>
+  </div>
+
   <footer>
-    <p>&copy; 2025 Završni Radovi Interijera. Sva prava pridržana.</p>
+    <p>&copy; 2025 Završni Radovi Interijera</p>
   </footer>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById("chatbot").style.display = "block";
+    }, 10000);
+
+    function replyToUser() {
+      const input = document.getElementById("userInput").value.toLowerCase();
+      const log = document.getElementById("chatLog");
+      let answer = "Nažalost, nisam razumio pitanje. Molimo pokušajte drugačije.";
+
+      if (input.includes("cijena") || input.includes("koliko")) {
+        answer = "Cijene ovise o vrsti radova i kvadraturi. Na primjer, polaganje pločica je oko 20 €/m², a mikrocement 35 €/m².";
+      } else if (input.includes("termin") || input.includes("slobodan")) {
+        answer = "Za provjeru slobodnih termina najbolje je ispuniti obrazac pod 'Ponuda'. Odgovorit ćemo vam vrlo brzo.";
+      } else if (input.includes("mikrocement")) {
+        answer = "Mikrocement je moderan materijal bez fuga, pogodan za zidove i podove, posebno u kupaonicama i dnevnim prostorima.";
+      } else if (input.includes("kontakt")) {
+        answer = "Kontaktirati nas možete putem stranice 'Kontakt' ili na e-mail info@zavrsniradovi.hr.";
+      } else if (input.includes("proces")) {
+        answer = "Naš proces uključuje hodogram radova i aplikaciju za praćenje napretka – sve transparentno i pregledno.";
+      }
+
+      log.innerHTML += `<p><strong>Vi:</strong> ${input}</p><p><strong>Asistent:</strong> ${answer}</p>`;
+      document.getElementById("userInput").value = "";
+      log.scrollTop = log.scrollHeight;
+    }
+  </script>
 </body>
 </html>
