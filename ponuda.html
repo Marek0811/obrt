@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zatraži ponudu - Završni Radovi Interijera</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    label, input, select, button {
+      display: block;
+      margin: 10px 0;
+    }
+    .quote-box {
+      background-color: #f3f3f3;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Zatraži ponudu</h1>
+    <nav>
+      <a href="index.html">Naslovnica</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="mikrocement.html">Mikrocement</a>
+      <a href="inspiracija.html">Inspiracija</a>
+      <a href="proces.html">Proces</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+  <main>
+    <section class="section">
+      <h2>Brza okvirna ponuda</h2>
+      <form id="quoteForm" method="POST" action="https://formspree.io/f/your-form-id">
+        <label for="workType">Vrsta radova:</label>
+        <select id="workType" required>
+          <option value="tiles">Polaganje pločica</option>
+          <option value="microcement">Mikrocement</option>
+          <option value="painting">Bojanje</option>
+          <option value="smoothing">Gletanje</option>
+        </select>
+
+        <label for="surface">Površina (m²):</label>
+        <input type="number" id="surface" required min="1" />
+
+        <label for="location">Lokacija:</label>
+        <input type="text" id="location" required />
+
+        <label for="date">Željeni termin:</label>
+        <input type="date" id="date" name="termin" required />
+
+        <label for="email">Vaš email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <button type="submit">Izračunaj ponudu i pošalji</button>
+      </form>
+
+      <div class="quote-box" id="quoteResult" style="display: none;"></div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Završni Radovi Interijera</p>
+  </footer>
+
+  <script>
+    const prices = {
+      tiles: 20,
+      microcement: 35,
+      painting: 8,
+      smoothing: 10
+    };
+
+    document.getElementById("quoteForm").addEventListener("submit", function (e) {
+      // e.preventDefault();
+
+      const workType = document.getElementById("workType").value;
+      const surface = parseFloat(document.getElementById("surface").value);
+      const location = document.getElementById("location").value;
+      const date = document.getElementById("date").value;
+
+      const pricePerM2 = prices[workType];
+      const total = surface * pricePerM2;
+
+      let workLabel = document.querySelector(`#workType option[value='${workType}']`).textContent;
+
+      document.getElementById("quoteResult").style.display = "block";
+      document.getElementById("quoteResult").innerHTML = `
+        <h3>Okvirna ponuda</h3>
+        <p><strong>Vrsta radova:</strong> ${workLabel}</p>
+        <p><strong>Površina:</strong> ${surface} m²</p>
+        <p><strong>Lokacija:</strong> ${location}</p>
+        <p><strong>Željeni termin:</strong> ${date}</p>
+        <p><strong>Okvirna cijena:</strong> ${total.toFixed(2)} €</p>
+        <p>Za točnu ponudu i pregled raspoloživih termina kontaktirat ćemo vas u najkraćem roku.</p>
+      `;
+    });
+  </script>
+</body>
+</html>
