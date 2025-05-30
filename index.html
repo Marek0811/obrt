@@ -4,44 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Završni Radovi Interijera</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
       margin: 0;
       padding: 0;
+      line-height: 1.6;
     }
     header, footer {
-      background-color: #2c3e50;
+      background-color: #1a1a1a;
       color: white;
       padding: 1rem;
       text-align: center;
     }
     nav a {
       color: white;
-      margin: 0 10px;
+      margin: 0 12px;
       text-decoration: none;
+      font-weight: 500;
     }
     .hero {
-      background: url('hero-image.jpg') center/cover no-repeat;
-      height: 50vh;
+      background: url('https://images.unsplash.com/photo-1595526114035-33fe5d8cfb6e') center/cover no-repeat;
+      height: 60vh;
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: bold;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
     }
     .section {
-      padding: 2rem;
-      max-width: 800px;
+      padding: 3rem 1rem;
+      max-width: 900px;
       margin: auto;
+    }
+    .section img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-top: 1rem;
     }
     .chatbot {
       position: fixed;
-      bottom: 20px;
+      bottom: 90px;
       right: 20px;
       background-color: #fff;
       border: 1px solid #ccc;
@@ -52,6 +59,8 @@
       overflow: auto;
       padding: 1rem;
       display: none;
+      z-index: 1000;
+      animation: fadeIn 0.5s ease-in-out;
     }
     .chat-log {
       max-height: 250px;
@@ -64,6 +73,32 @@
     }
     .chat-input input {
       flex-grow: 1;
+    }
+    .chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1a1a1a;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 1001;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slideIn 0.6s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
@@ -87,14 +122,18 @@
   <main class="section">
     <h2>O nama</h2>
     <p>
-      Naš obrt specijaliziran je za završne radove interijera – od preciznog polaganja pločica, modernog mikrocementa, do gletanja i bojanja zidova. 
+      Naš obrt specijaliziran je za završne radove interijera – od preciznog polaganja pločica, modernog mikrocementa, do gletanja i bojanja zidova.
       Kroz godine iskustva i rad na različitim projektima, izgradili smo reputaciju pouzdanog partnera za sve koji žele kvalitetno izvedene radove, bez kompromisa.
     </p>
     <p>
       Svakom klijentu pristupamo individualno, s jasnim planom i transparentnim rokovima. Uz našu aplikaciju možete pratiti tijek radova, slike i procijenjeni završetak – dan po dan.
     </p>
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Moderno uređeni interijer" />
   </main>
 
+  <button class="chat-toggle" onclick="toggleChat()">
+    <i class="fas fa-comment-dots"></i> Zatraži ponudu
+  </button>
   <div class="chatbot" id="chatbot">
     <div class="chat-log" id="chatLog">
       <strong>Asistent:</strong>
@@ -111,9 +150,10 @@
   </footer>
 
   <script>
-    setTimeout(() => {
-      document.getElementById("chatbot").style.display = "block";
-    }, 10000);
+    function toggleChat() {
+      const chat = document.getElementById("chatbot");
+      chat.style.display = chat.style.display === "none" ? "block" : "none";
+    }
 
     function replyToUser() {
       const input = document.getElementById("userInput").value.toLowerCase();
