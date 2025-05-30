@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspiracija</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <h1>Inspiracija za Vaš Dom</h1>
+    <nav>
+      <a href="index.html">Naslovnica</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="mikrocement.html">Mikrocement</a>
+      <a href="inspiracija.html">Inspiracija</a>
+      <a href="proces.html">Proces</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+
+  <main class="section">
+    <h2>Naši prijedlozi uređenja</h2>
+    <p>
+      Kombinacija podne keramike i zidnog mikrocementa nudi savršeni spoj elegancije, trajnosti i suvremenog dizajna. Ispod donosimo prijedloge uređenja kupaonice i dnevnog boravka koji koriste upravo tu kombinaciju.
+    </p>
+
+    <h3>Moderna kupaonica</h3>
+    <img src="https://images.unsplash.com/photo-1600566753085-9ecae04e1f68" alt="Kupaonica s mikrocement zidovima i keramičkim podom">
+    <p>
+      U kupaonici dominiraju glatki sivi mikrocement zidovi bez fuga, čime se postiže čistoća linija i vizualna jednostavnost. Pod je prekriven elegantnom velikom keramikom u svijetlim tonovima, otporan na vlagu i jednostavan za održavanje.
+    </p>
+
+    <h3>Dnevni boravak</h3>
+    <img src="https://images.unsplash.com/photo-1615873968403-cd114eced668" alt="Dnevni boravak s mikrocement zidom">
+    <p>
+      Ovaj prostor kombinira toplinu drvenog namještaja s hladnim tonovima mikrocementa na jednom dominantnom zidu. Keramički pod daje čvrstoću i lakoću održavanja prostoru koji je ujedno elegantan i funkcionalan.
+    </p>
+  </main>
+
+  <button class="chat-toggle" onclick="toggleChat()">
+    <i class="fas fa-comment-dots"></i> Zatraži ponudu
+  </button>
+  <div class="chatbot" id="chatbot">
+    <div class="chat-log" id="chatLog">
+      <strong>Asistent:</strong>
+      <p>Bok! Imate pitanje o uređenju interijera, materijalima ili našim prijedlozima?</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Vaše pitanje...">
+      <button onclick="replyToUser()">Pošalji</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Završni Radovi Interijera</p>
+  </footer>
+
+  <script>
+    function toggleChat() {
+      const chat = document.getElementById("chatbot");
+      chat.style.display = chat.style.display === "none" ? "block" : "none";
+    }
+
+    function replyToUser() {
+      const input = document.getElementById("userInput").value.toLowerCase();
+      const log = document.getElementById("chatLog");
+      let answer = "Nažalost, nisam razumio pitanje. Molimo pokušajte drugačije.";
+
+      if (input.includes("kupaonica")) {
+        answer = "Naš prijedlog kupaonice uključuje mikrocement zidove i keramičke podove – elegantno i izdržljivo rješenje.";
+      } else if (input.includes("dnevni") || input.includes("boravak")) {
+        answer = "Dnevni boravak preporučujemo s keramičkim podovima i mikrocement akcent zidom – modernog izgleda.";
+      } else if (input.includes("mikrocement")) {
+        answer = "Mikrocement je bezfugni premaz koji se lako održava i izgleda vrlo moderno – odličan za zidove i podove.";
+      }
+
+      log.innerHTML += `<p><strong>Vi:</strong> ${input}</p><p><strong>Asistent:</strong> ${answer}</p>`;
+      document.getElementById("userInput").value = "";
+      log.scrollTop = log.scrollHeight;
+    }
+  </script>
+</body>
+</html>
